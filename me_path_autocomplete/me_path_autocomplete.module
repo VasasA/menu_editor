@@ -118,7 +118,7 @@ function _me_path_autocomplete_get_matches_for_nodes($like_placeholder) {
     if (node_access('view', $node) && $node->status) {
       $node_title = check_plain($node->title);
       $nid = $node->nid;
-      $lang = $node->language !== LANGUAGE_NONE ? ($node->language . ': ') : '';
+      $lang = $node->langcode !== LANGUAGE_NONE ? ($node->langcode . ': ') : '';
       $matches['node/'. $node->nid] = $lang . "$node_title [nid:$nid]";
     }
   }
@@ -150,7 +150,7 @@ function _me_path_autocomplete_get_matches_for_aliases($like_placeholder) {
   foreach ($q->execute() as $alias) {
     // Add alias source and destination to list (and add a special marker to
     // the item).
-    $lang = $alias->language !== LANGUAGE_NONE ? ($alias->language . ': ') : '';
+    $lang = $alias->langcode !== LANGUAGE_NONE ? ($alias->langcode . ': ') : '';
     $src = check_plain($alias->source);
     $dst = check_plain($alias->alias);
     $matches[$alias->source] = $lang . "$dst | $src";

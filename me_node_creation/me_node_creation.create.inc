@@ -17,7 +17,7 @@ function me_node_creation_create_node($type, array $menu_item) {
     'uid' => $user->uid,
     'name' => isset($user->name) ? $user->name : '',
     'type' => $type->type,
-    'language' => LANGUAGE_NONE,
+    'langcode' => LANGUAGE_NONE,
     'me_node_creation_menu_item' => $menu_item,
   );
 
