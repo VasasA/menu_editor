@@ -684,8 +684,8 @@ function menu_editor_overview_form_submit(array $form, array &$form_state) {
  */
 function theme_menu_editor_overview_form(array $variables) {
   $form = $variables['form'];
-  drupal_add_css(drupal_get_path('module', 'menu_editor') . '/menu_editor.css');
-  drupal_add_js(drupal_get_path('module', 'menu_editor') . '/menu_editor.js');
+  drupal_add_css(drupal_get_path('module', 'menu_editor') . '/css/menu_editor.css');
+  drupal_add_js(drupal_get_path('module', 'menu_editor') . '/js/menu_editor.js');
   global $language;
   $i18n_menu = $form['#multilingual_menu'] || $form['#translatable_nodes'];
   drupal_add_tabledrag('menu-overview', 'match', 'parent', 'menu-plid', 'menu-plid', 'menu-mlid', TRUE, MENU_MAX_DEPTH - 1);
