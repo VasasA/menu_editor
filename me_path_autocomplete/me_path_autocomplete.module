@@ -49,7 +49,7 @@ function me_path_autocomplete($string = NULL) {
 
   $matches = _me_path_autocomplete_get_matches($string);
 
-  drupal_json_output($matches);
+  backdrop_json_output($matches);
 }
 
 /**

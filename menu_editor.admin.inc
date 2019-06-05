@@ -20,7 +20,7 @@
 function menu_editor_overview_form(array $old_form, array &$form_state, array $menu) {
 
   if (!empty($_POST['menu_editor:max_input_vars_reached'])) {
-    drupal_set_message(
+    backdrop_set_message(
       t("The submitted form has more elements than supported by the server configuration."),
       'warning');
 
@@ -134,7 +134,7 @@ function _menu_editor_overview_tree_form(array &$form, array &$form_state, array
       $path = $item['link_path'];
       if (!empty($item['options']['query'])) {
         if (is_array($item['options']['query'])) {
-          $path .= '?' . drupal_http_build_query($item['options']['query']);
+          $path .= '?' . backdrop_http_build_query($item['options']['query']);
         }
         else {
           // Query could be a string, due to a malfunction in previous versions of this module.
@@ -245,8 +245,8 @@ function _menu_editor_overview_tree_form(array &$form, array &$form_state, array
 /**
  * Creates a label suffix with additional information about a menu link.
  *
- * This replicates a planned feature for Drupal core, which is discussed in
- * @link https://www.drupal.org/project/drupal/issues/460408
+ * This replicates a planned feature for Backdrop core, which is discussed in
+ * @link https://www.drupal.org/project/backdrop/issues/460408
  *
  * @param array $item
  *   An array representing the menu link item.
@@ -298,14 +298,14 @@ function _menu_editor_overview_tree_form_item($item_mlid, $default_values, $mult
   $element['link_title'] = array(
     '#type' => 'textfield',
     '#size' => 25,
-    // Link title #maxlength should be the same as in Drupal core.
+    // Link title #maxlength should be the same as in Backdrop core.
     /* @see menu_edit_item() */
     '#maxlength' => 255,
   );
   $element['link_path'] = array(
     '#type' => 'textfield',
     '#size' => 25,
-    // Link path #maxlength should be the same as in Drupal core.
+    // Link path #maxlength should be the same as in Backdrop core.
     /* @see menu_edit_item() */
     '#maxlength' => 255,
   );
@@ -421,7 +421,7 @@ function menu_editor_validate_item(array &$element, $link_path, $error_key_prefi
     return;
   }
   $item = $element['#item'];
-  $normal_path = drupal_get_normal_path($link_path);
+  $normal_path = backdrop_get_normal_path($link_path);
   $item['link_path'] = $normal_path;
 
   if (!url_is_external($normal_path)) {
@@ -429,14 +429,14 @@ function menu_editor_validate_item(array &$element, $link_path, $error_key_prefi
     $parsed_link = parse_url($normal_path);
 
     if (isset($parsed_link['query'])) {
-      $item['options']['query'] = drupal_get_query_array($parsed_link['query']);
+      $item['options']['query'] = backdrop_get_query_array($parsed_link['query']);
     }
     if (isset($parsed_link['fragment'])) {
       $item['options']['fragment'] = $parsed_link['fragment'];
     }
     $item['link_path'] = $parsed_link['path'];
   }
-  if (!trim($item['link_path']) || !drupal_valid_path($item['link_path'])) {
+  if (!trim($item['link_path']) || !backdrop_valid_path($item['link_path'])) {
     form_set_error($error_key_prefix . 'link_path', t("The path '@link_path' is either invalid or you do not have access to it.", array('@link_path' => $item['link_path'])));
   }
 }
@@ -595,12 +595,12 @@ function menu_editor_overview_form_submit(array $form, array &$form_state) {
 
     // clean the link path
     if (isset($link_path)) {
-      $link_path = drupal_get_normal_path($link_path);
+      $link_path = backdrop_get_normal_path($link_path);
       if (!url_is_external($link_path)) {
         $parsed_link = parse_url($link_path);
 
         if (isset($parsed_link['query'])) {
-          $item['options']['query'] = drupal_get_query_array($parsed_link['query']);
+          $item['options']['query'] = backdrop_get_query_array($parsed_link['query']);
         }
         else {
           unset($item['options']['query']);
@@ -617,13 +617,13 @@ function menu_editor_overview_form_submit(array $form, array &$form_state) {
           $link_path = $parsed_link['path'];
         }
       }
-      if (!trim($link_path) || !drupal_valid_path($link_path)) {
+      if (!trim($link_path) || !backdrop_valid_path($link_path)) {
         // invalid link path, discard this item
         continue;
       }
     }
 
-    // drupal_set_message('<pre>' . print_r($item, true) . '</pre>');
+    // backdrop_set_message('<pre>' . print_r($item, true) . '</pre>');
     if (!empty($item['plid']) && !is_numeric($item['plid'])) {
       if (isset($mlids["mlid-$item[plid]"])) {
         $item['plid'] = $mlids["mlid-$item[plid]"];
@@ -667,7 +667,7 @@ function menu_editor_overview_form_submit(array $form, array &$form_state) {
   }
 
   if (!empty($errors)) {
-    drupal_set_message(t('There were errors saving the following menu links:<br/>' . implode('<br/>', $errors)), 'error');
+    backdrop_set_message(t('There were errors saving the following menu links:<br/>' . implode('<br/>', $errors)), 'error');
   }
 }
 
@@ -684,12 +684,12 @@ function menu_editor_overview_form_submit(array $form, array &$form_state) {
  */
 function theme_menu_editor_overview_form(array $variables) {
   $form = $variables['form'];
-  drupal_add_css(drupal_get_path('module', 'menu_editor') . '/css/menu_editor.css');
-  drupal_add_js(drupal_get_path('module', 'menu_editor') . '/js/menu_editor.js');
+  backdrop_add_css(backdrop_get_path('module', 'menu_editor') . '/css/menu_editor.css');
+  backdrop_add_js(backdrop_get_path('module', 'menu_editor') . '/js/menu_editor.js');
   global $language;
   $i18n_menu = $form['#multilingual_menu'] || $form['#translatable_nodes'];
-  drupal_add_tabledrag('menu-overview', 'match', 'parent', 'menu-plid', 'menu-plid', 'menu-mlid', TRUE, MENU_MAX_DEPTH - 1);
-  drupal_add_tabledrag('menu-overview', 'order', 'sibling', 'menu-weight');
+  backdrop_add_tabledrag('menu-overview', 'match', 'parent', 'menu-plid', 'menu-plid', 'menu-mlid', TRUE, MENU_MAX_DEPTH - 1);
+  backdrop_add_tabledrag('menu-overview', 'order', 'sibling', 'menu-weight');
 
   $header = array();
   $header[] = t('Menu item');
@@ -729,24 +729,24 @@ function theme_menu_editor_overview_form(array $variables) {
 
       $size = isset($element['#item']['depth']) ? $element['#item']['depth'] : 1;
       $cells['drag'] = array(
-        'data' => theme('indentation', array('size' => $size - 1)) . drupal_render($element['drag']),
+        'data' => theme('indentation', array('size' => $size - 1)) . backdrop_render($element['drag']),
         'class' => 'drag',
       );
-      $cells['link_title'] = array('data' => drupal_render($element['link_title']), 'class' => 'title-edit');
-      $cells['link_path'] = array('data' => drupal_render($element['link_path']), 'class' => 'path-edit');
-      $cells['description'] = array('data' => drupal_render($element['description']), 'class' => 'description');
-      $cells['enabled'] = array('data' => drupal_render($element['enabled']), 'class' => 'checkbox');
-      $cells['expanded'] = array('data' => drupal_render($element['expanded']), 'class' => 'checkbox');
-      $cells['mlid'] = drupal_render($element['weight']) . drupal_render($element['plid']) . drupal_render($element['mlid']);
+      $cells['link_title'] = array('data' => backdrop_render($element['link_title']), 'class' => 'title-edit');
+      $cells['link_path'] = array('data' => backdrop_render($element['link_path']), 'class' => 'path-edit');
+      $cells['description'] = array('data' => backdrop_render($element['description']), 'class' => 'description');
+      $cells['enabled'] = array('data' => backdrop_render($element['enabled']), 'class' => 'checkbox');
+      $cells['expanded'] = array('data' => backdrop_render($element['expanded']), 'class' => 'checkbox');
+      $cells['mlid'] = backdrop_render($element['weight']) . backdrop_render($element['plid']) . backdrop_render($element['mlid']);
       if ($i18n_menu) {
         if (isset($element['lang_message'])) {
-          $cells['language'] = array('data' => drupal_render($element['lang_message']));
+          $cells['language'] = array('data' => backdrop_render($element['lang_message']));
         }
         else {
-          $cells['language'] = array('data' => drupal_render($element['language']), 'class' => 'select');
+          $cells['language'] = array('data' => backdrop_render($element['language']), 'class' => 'select');
         }
       }
-      $cells['delete'] = array('data' => drupal_render($element['delete']), 'class' => 'delete-checkbox');
+      $cells['delete'] = array('data' => backdrop_render($element['delete']), 'class' => 'delete-checkbox');
 
       $row = array_merge(array('data' => $cells), $element['#attributes']);
       $row['class'] = array('draggable');
@@ -760,8 +760,8 @@ function theme_menu_editor_overview_form(array $variables) {
   }
   $output = '';
   // allow other modules to change the table data.
-  drupal_alter('menu_editor_overview_table', $header, $rows);
+  backdrop_alter('menu_editor_overview_table', $header, $rows);
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'menu-overview')));
-  $output .= drupal_render_children($form);
+  $output .= backdrop_render_children($form);
   return $output;
 }

@@ -11,7 +11,7 @@
 function me_node_creation_create_node($type, array $menu_item) {
   global $user;
 
-  drupal_set_title(t('Create @name', array('@name' => $type->name)), PASS_THROUGH);
+  backdrop_set_title(t('Create @name', array('@name' => $type->name)), PASS_THROUGH);
 
   $node = entity_create('node', array('type' => $type->type));
   $node->uid = $user->uid;
@@ -21,7 +21,7 @@ function me_node_creation_create_node($type, array $menu_item) {
 
   module_load_include('pages.inc', 'node');
 
-  $form = drupal_get_form($type->type . '_node_form', $node);
+  $form = backdrop_get_form($type->type . '_node_form', $node);
 
   return $form;
 }

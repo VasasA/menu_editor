@@ -1,5 +1,5 @@
 (function($) {
-  Drupal.behaviors.menuEditor = {
+  Backdrop.behaviors.menuEditor = {
     attach: function (context, settings) {
       $('#menu-editor-overview-form #menu-overview', context).each(function(){
 

@@ -11,7 +11,7 @@
  *   TODO: We could instead return a renderable array.
  */
 function menu_editor_placeholder_page($item) {
-  drupal_set_title(t('!link_title - Under Construction', array(
+  backdrop_set_title(t('!link_title - Under Construction', array(
     '!link_title' => $item['link_title'],
   )));
   $html = '';
