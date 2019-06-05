@@ -22,7 +22,7 @@
           master_delete_checkbox.change(onchange);
 
           // IE does not trigger the change event..
-          if ($.browser.msie) {
+          if (isIE()) {
             master_delete_checkbox.click(onchange);
           }
         })();
@@ -62,6 +62,15 @@
           $(this).parents('tr').slice(0, 1).addClass('focus');
         });
       });
+
+      // Function that returns boolean in case the browser is Internet Explorer.
+      function isIE() {
+        ua = navigator.userAgent;
+        // MSIE used to detect old browsers and Trident used to newer ones.
+        var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+
+        return is_ie;
+      }
     }
   };
 })(jQuery);
