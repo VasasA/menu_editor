@@ -13,13 +13,11 @@ function me_node_creation_create_node($type, array $menu_item) {
 
   drupal_set_title(t('Create @name', array('@name' => $type->name)), PASS_THROUGH);
 
-  $node = (object)array(
-    'uid' => $user->uid,
-    'name' => isset($user->name) ? $user->name : '',
-    'type' => $type->type,
-    'langcode' => LANGUAGE_NONE,
-    'me_node_creation_menu_item' => $menu_item,
-  );
+  $node = entity_create('node', array ('type' => $type->type));
+  $node->uid = $user->uid;
+  $node->name = isset($user->name) ? $user->name : '';
+  $node->langcode = LANGUAGE_NONE;
+  $node->me_node_creation_menu_item = $menu_item;
 
   module_load_include('pages.inc', 'node');
 
