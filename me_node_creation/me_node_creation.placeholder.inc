@@ -30,7 +30,8 @@ function menu_editor_placeholder_page($item) {
 <p>$txt_admin</p>
 <ul>$html</ul>
 EOT;
-  } else {
+  }
+  else {
     return <<<EOT
 <p>$txt</p>
 EOT;

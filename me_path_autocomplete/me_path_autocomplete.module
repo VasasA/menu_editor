@@ -119,7 +119,7 @@ function _me_path_autocomplete_get_matches_for_nodes($like_placeholder) {
       $node_title = check_plain($node->title);
       $nid = $node->nid;
       $lang = $node->langcode !== LANGUAGE_NONE ? ($node->langcode . ': ') : '';
-      $matches['node/'. $node->nid] = $lang . "$node_title [nid:$nid]";
+      $matches['node/' . $node->nid] = $lang . "$node_title [nid:$nid]";
     }
   }
 

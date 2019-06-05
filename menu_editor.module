@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
 function menu_editor_menu() {
   $items['admin/structure/menu/manage/%menu/poweredit'] = array(
@@ -42,10 +42,7 @@ function menu_editor_permission() {
  * @return bool
  */
 function menu_editor_form_access($menu) {
-  return
-    user_access('administer menu') ||
-    user_access("menu edit $menu[menu_name]")
-  ;
+  return user_access('administer menu') || user_access("menu edit $menu[menu_name]");
 }
 
 // function menu_editor_admin_menu() {
@@ -77,19 +74,16 @@ function menu_editor_theme() {
 }
 
 /**
- * Implements hook_preprocess_THEMEHOOK
+ * Implements hook_preprocess_THEMEHOOK().
  *
  * @param array $variables
  *
  * @see theme_form()
  */
 function menu_editor_preprocess_form(array &$variables) {
-  $form =& $variables['element'];
+  $form = &$variables['element'];
 
-  if (0
-    || !isset($form['#form_id'])
-    || 'menu_editor_overview_form' !== $form['#form_id']
-  ) {
+  if (!isset($form['#form_id']) || 'menu_editor_overview_form' !== $form['#form_id']) {
     return;
   }
 

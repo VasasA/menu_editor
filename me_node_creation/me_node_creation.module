@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements hook_permission()
+ * Implements hook_permission().
  */
 function me_node_creation_permission() {
   return array(
@@ -12,7 +12,7 @@ function me_node_creation_permission() {
 }
 
 /**
- * Implements hook_menu()
+ * Implements hook_menu().
  */
 function me_node_creation_menu() {
   $items = array();
@@ -46,7 +46,7 @@ function me_node_creation_menu() {
 }
 
 /**
- * Implements hook_form_alter()
+ * Implements hook_form_alter().
  *
  * @param array $form
  * @param array $form_state
@@ -66,7 +66,7 @@ function me_node_creation_form_alter(array &$form, array &$form_state, $form_id)
 }
 
 /**
- * Implements hook_node_insert()
+ * Implements hook_node_insert().
  *
  * @param object $node
  */
@@ -88,7 +88,7 @@ function me_node_creation_node_insert($node) {
 }
 
 /**
- * Implements hook_crumbs_plugins()
+ * Implements hook_crumbs_plugins().
  *
  * @param crumbs_InjectedAPI_hookCrumbsPlugins $api
  *
@@ -99,11 +99,11 @@ function me_node_creation_crumbs_plugins($api) {
 }
 
 
-// Wildcard loaders
+// Wildcard loaders.
 // -----------------------------------------------------------------------------
 
 /**
- * Wildcard loader for %menu_editor_menu_link
+ * Wildcard loader for %menu_editor_menu_link.
  * This is similar to menu_link_load(), but we do some loop prevention.
  *
  * TODO: Test if the by-reference does not explode in some edge cases.
@@ -127,7 +127,7 @@ function menu_editor_menu_link_load($mlid) {
     $query->condition('ml.mlid', $mlid);
     /** @noinspection NullPointerExceptionInspection */
     if ($item = $query->execute()->fetchAssoc()) {
-      $_cache[$mlid] =& $item;
+      $_cache[$mlid] = & $item;
       $item['weight'] = $item['link_weight'];
       // The data being unserialized here is not coming from user input.
       /** @noinspection UnserializeExploitsInspection */
@@ -140,7 +140,7 @@ function menu_editor_menu_link_load($mlid) {
 }
 
 
-// Title callbacks
+// Title callbacks.
 // -----------------------------------------------------------------------------
 
 /**
@@ -179,7 +179,7 @@ function me_node_creation_title($type_arg, $item) {
 }
 
 
-// Access callbacks
+// Access callbacks.
 // -----------------------------------------------------------------------------
 
 /**
@@ -199,7 +199,7 @@ function me_node_creation_create_node_access($type) {
 }
 
 
-// Utility
+// Utility.
 // -----------------------------------------------------------------------------
 
 /**

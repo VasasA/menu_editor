@@ -13,7 +13,7 @@ function me_node_creation_create_node($type, array $menu_item) {
 
   drupal_set_title(t('Create @name', array('@name' => $type->name)), PASS_THROUGH);
 
-  $node = entity_create('node', array ('type' => $type->type));
+  $node = entity_create('node', array('type' => $type->type));
   $node->uid = $user->uid;
   $node->name = isset($user->name) ? $user->name : '';
   $node->langcode = LANGUAGE_NONE;

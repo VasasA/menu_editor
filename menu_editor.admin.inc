@@ -225,7 +225,7 @@ function _menu_editor_overview_tree_form(array &$form, array &$form_state, array
       }
 
       // Only items created by the menu module can be deleted.
-      if ($item['module'] === 'menu' || (string)$item['updated'] === '1') {
+      if ($item['module'] === 'menu' || (string) $item['updated'] === '1') {
         $form[$item_key]['delete'] = array(
           '#type' => 'checkbox',
           '#title' => t('delete'),
@@ -721,7 +721,7 @@ function theme_menu_editor_overview_form(array $variables) {
 
       // Adjust tab index to allow vertical tabbing
       foreach (array('link_title', 'link_path', 'description', 'enabled', 'expanded') as $i => $key) {
-        $element[$key]['#attributes']['tabindex'] = $i+2;
+        $element[$key]['#attributes']['tabindex'] = $i + 2;
       }
       $element['link_path']['#attributes']['tabindex'] = 2;
 
@@ -752,8 +752,8 @@ function theme_menu_editor_overview_form(array $variables) {
       $row['class'] = array('draggable');
       if ($i18n_menu) {
         $langcode = isset($element['language']['#default_value']) ? $element['language']['#default_value'] : $element['language']['#value'];
-        $row['class'][] = ($langcode !== LANGUAGE_NONE) ? 'langcode-'.$langcode : 'all-languages';
-        $row['class'][]= ($langcode === $language->language) ? 'active-language' : '';
+        $row['class'][] = ($langcode !== LANGUAGE_NONE) ? 'langcode-' . $langcode : 'all-languages';
+        $row['class'][] = ($langcode === $language->language) ? 'active-language' : '';
       }
       $rows[$item_key] = $row;
     }
