@@ -245,8 +245,8 @@ function _menu_editor_overview_tree_form(array &$form, array &$form_state, array
 /**
  * Creates a label suffix with additional information about a menu link.
  *
- * This replicates a planned feature for Backdrop core, which is discussed in
- * @link https://www.drupal.org/project/backdrop/issues/460408
+ * This replicates a planned feature for Drupal core, which is discussed in
+ * @link https://www.drupal.org/project/drupal/issues/460408
  *
  * @param array $item
  *   An array representing the menu link item.
