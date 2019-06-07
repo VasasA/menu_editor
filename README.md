@@ -30,13 +30,14 @@ Features
 
 - Tabindex: The tab index is modified to skip the annoying checkbox fields ("Enabled", "Expanded", "Delete").
 
-- Placeholder items for new content: You can create menu items for yet non-existing content. Instead of a useless dummy link path, you write "<new page>" or "<new post>" or "<new [content type]>", which is internally stored as "node/add/[content type]/mlid/[mlid]". If you visit that link, you get a node creation form that will make the menu item point to the newly created node. Alternatively, you can use <new> as a general purpose "under construction" placeholder. This allows to quickly plan a site structure with the client, without creating dummy nodes.
+- Node creation sub-module: Placeholder items for new content.
+You can create menu items for yet non-existing content. Instead of a useless dummy link path, you write `<new page>` or `<new post>` or `<new [content type]>`, which is internally stored as "node/add/[content type]/mlid/[mlid]". If you visit that link, you get a node creation form that will make the menu item point to the newly created node. Alternatively, you can use `<new>` as a general purpose "under construction" placeholder. This allows to quickly plan a site structure with the client, without creating dummy nodes.
 
 - Hook for your own placeholders: The placeholders are defined via an implementation of hook_menu_editor_placeholders(). The definition of this hook might change in the future, to allow more flexible placeholder schemes.
 
 - Permissions: menu_editor introduces one new permission per menu, which gives access to the respective menu_editor page (and nothing more). Users with the "administer menu" permission don't need this extra checkbox, they can always edit all menus.
 
-- Path autocomplete: Path Autocomplete for Menu Editor. This allows to fill your menu items with links to existing content more easily.
+- Menu Editor path autocomplete sub-module: This allows to fill your menu items with links to existing content more easily.
 
 - Performance / memory: Replaced the weight dropdowns with text fields, similar to Tiny menu editor. The page will still be quite heavy with all the different input fields, but less than it would be if each row has a dropdown with 50 options.
 
